@@ -620,6 +620,15 @@ enum class ProfileAction {
 struct ReplayBuffer;
 void SaveReplayBuffer(ReplayBuffer *out, DWORD timestamp);
 
+//-------By Hwang
+typedef struct
+{
+	unsigned char second; // 0-59
+	unsigned char minute; // 0-59
+	unsigned char hour;   // 0-23
+}_time_t;
+
+
 //todo: this class has become way too big, it's horrible, and I should be ashamed of myself
 class OBS
 {
@@ -1324,6 +1333,15 @@ public:
     void AddPendingStreamThread(HANDLE thread);
     void ClosePendingStreams();
     void LoadAllPlugins();
+    
+
+	//------- By Hwang ----------------------
+	__int64 _time_to_epoch(_time_t* _time);
+	_time_t _epoch_to_time(__int64 seconds);
+
+	__int64 getCurrentTimestamp();
+	__int64 getOffsetTimestamp();
+	//--------------------------------------
 };
 
 LONG CALLBACK OBSExceptionHandler (PEXCEPTION_POINTERS exceptionInfo);
